@@ -1,0 +1,16 @@
+{
+  "name": "riyal-spent",
+  "scripts": {
+    "dev": "pnpm run -r --parallel --aggregate-output dev",
+    "build": "pnpm run -r build",
+    "start": "pnpm run -r --parallel start"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "packageManager": "pnpm@10.23.0"
+}
