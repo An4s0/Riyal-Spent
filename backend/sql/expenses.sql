@@ -1,7 +1,7 @@
 CREATE TABLE
     expenses (
         -- Primary key
-        expense_id INT AUTO_INCREMENT PRIMARY KEY,
+        expense_id INTEGER PRIMARY KEY,
         -- Relations
         user_id INT NOT NULL,
         category_id INT,
