@@ -12,3 +12,5 @@ logs
 .vscode
 
 pnpm-lock.yaml
+
+*.db
