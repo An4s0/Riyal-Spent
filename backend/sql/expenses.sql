@@ -13,6 +13,6 @@ CREATE TABLE
         created_at DATETIME,
         last_modified DATETIME,
         -- Foreign keys
-        FOREIGN KEY (user_id) REFERENCES user (user_id),
-        FOREIGN KEY (category_id) REFERENCES category (category_id)
+        FOREIGN KEY (user_id) REFERENCES users (user_id),
+        FOREIGN KEY (category_id) REFERENCES categories (category_id)
     );

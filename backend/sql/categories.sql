@@ -7,9 +7,9 @@ CREATE TABLE
         -- Category info
         name VARCHAR(100) NOT NULL,
         icon VARCHAR(50),
-        color_code VARCHAR(7), 
+        color_code VARCHAR(7),
         -- Timestamp
         created_at DATE,
         -- Foreign key
-        FOREIGN KEY (user_id) REFERENCES user (user_id)
+        FOREIGN KEY (user_id) REFERENCES users (user_id)
     );
