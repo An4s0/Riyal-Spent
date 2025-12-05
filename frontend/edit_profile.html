@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Edit Profile – Riyal Spent</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/api.js"></script>
+    <script src="js/edit_profile.js" defer></script>
+</head>
+<body class="page-body">
+
+<header class="topbar">
+    <a href="profile.html" class="back-btn">←</a>
+    <h2>Edit Profile</h2>
+</header>
+
+<div class="card profile-card">
+    <input id="name" type="text" class="input" placeholder="Full Name">
+    <input id="email" type="email" class="input" placeholder="Email">
+
+    <select id="currency" class="input">
+        <option value="SAR">SAR (Saudi Riyal)</option>
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+    </select>
+
+    <button class="btn-primary full" id="saveBtn">Save Changes</button>
+    <p id="saveMsg" class="msg"></p>
+</div>
+
+</body>
+</html>
