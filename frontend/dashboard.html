@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dashboard – Riyal Spent</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js" defer></script>
+</head>
+
+<body class="page-body">
+
+<header class="topbar">
+    <h2>Dashboard</h2>
+    <a href="profile.html" class="profile-icon">👤</a>
+</header>
+
+<section class="card-grid">
+    <div class="card">
+        <label>Total Spent</label>
+        <h2 id="totalMonth">0 SAR</h2>
+    </div>
+
+    <div class="card">
+        <label>Daily Average</label>
+        <h2 id="avgDay">0 SAR</h2>
+    </div>
+
+    <div class="card">
+        <label>Total Expenses</label>
+        <h2 id="countExp">0</h2>
+    </div>
+</section>
+
+<section class="chart-section">
+    <div class="chart-card">
+        <h3>Spending by Category</h3>
+        <canvas id="catChart"></canvas>
+    </div>
+
+    <div class="chart-card">
+        <h3>Monthly Trend</h3>
+        <canvas id="trendChart"></canvas>
+    </div>
+</section>
+
+<section class="list-section">
+    <h3>Recent Expenses</h3>
+    <div id="recentList"></div>
+</section>
+
+</body>
+</html>
