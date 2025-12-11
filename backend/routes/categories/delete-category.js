@@ -1,5 +1,3 @@
-// Purpose: Delete category
-
 const express = require("express");
 const router = express.Router();
 const { openDb, getUserIdFromRequest } = require("../Database-connection-assistant");
@@ -42,3 +40,4 @@ router.delete("/categories/:id", async (req, res) => {
 });
 
 module.exports = router;
+
