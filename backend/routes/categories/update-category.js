@@ -1,5 +1,3 @@
-// Purpose: Update category name, icon, or color_code
-
 const express = require("express");
 const router = express.Router();
 const { openDb, getUserIdFromRequest } = require("../Database-connection-assistant");
@@ -55,4 +53,5 @@ router.put("/categories/:id", async (req, res) => {
 });
 
 module.exports = router;
+
 
