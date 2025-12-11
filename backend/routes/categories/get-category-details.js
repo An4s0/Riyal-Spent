@@ -1,5 +1,3 @@
-// Purpose: Get single category by id
-
 const express = require("express");
 const router = express.Router();
 const { openDb, getUserIdFromRequest } = require("../Database-connection-assistant");
@@ -35,3 +33,4 @@ router.get("/categories/:id", async (req, res) => {
 });
 
 module.exports = router;
+
