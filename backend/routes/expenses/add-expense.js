@@ -1,5 +1,3 @@
-// Purpose: Add new expense
-
 const express = require("express");
 const router = express.Router();
 const { openDb, getUserIdFromRequest } = require("../Database-connection-assistant");
@@ -54,3 +52,4 @@ router.post("/expenses", async (req, res) => {
 });
 
 module.exports = router;
+
