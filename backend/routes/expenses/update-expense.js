@@ -1,5 +1,3 @@
-// Purpose: Update existing expense
-
 const express = require("express");
 const router = express.Router();
 const { openDb, getUserIdFromRequest } = require("../Database-connection-assistant");
@@ -67,3 +65,4 @@ router.put("/expenses/:id", async (req, res) => {
 });
 
 module.exports = router;
+
