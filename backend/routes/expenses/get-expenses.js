@@ -1,5 +1,3 @@
-// Purpose: List all expenses for logged-in user
-
 const express = require("express");
 const router = express.Router();
 const { openDb, getUserIdFromRequest } = require("../Database-connection-assistant");
@@ -44,3 +42,4 @@ router.get("/expenses", async (req, res) => {
 });
 
 module.exports = router;
+
