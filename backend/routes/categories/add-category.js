@@ -1,5 +1,3 @@
-// Purpose: Add new category
-
 const express = require("express");
 const router = express.Router();
 const { openDb, getUserIdFromRequest } = require("../Database-connection-assistant");
@@ -44,3 +42,4 @@ router.post("/categories", async (req, res) => {
 });
 
 module.exports = router;
+
