@@ -1,5 +1,3 @@
-// Purpose: List all categories for logged-in user
-
 const express = require("express");
 const router = express.Router();
 const { openDb, getUserIdFromRequest } = require("../Database-connection-assistant");
@@ -31,3 +29,4 @@ router.get("/categories", async (req, res) => {
 });
 
 module.exports = router;
+
