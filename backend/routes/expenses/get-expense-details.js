@@ -1,5 +1,3 @@
-// Purpose: Get one expense by id
-
 const express = require("express");
 const router = express.Router();
 const { openDb, getUserIdFromRequest } = require("../Database-connection-assistant");
@@ -36,3 +34,4 @@ router.get("/expenses/:id", async (req, res) => {
 });
 
 module.exports = router;
+
