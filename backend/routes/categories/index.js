@@ -1,5 +1,3 @@
-// Purpose: Group all category routes
-
 const express = require("express");
 const router = express.Router();
 
@@ -10,3 +8,4 @@ router.use("/", require("./update-category"));
 router.use("/", require("./delete-category"));
 
 module.exports = router;
+
