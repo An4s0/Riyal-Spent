@@ -1,66 +1,83 @@
+import { Link } from "react-router-dom";
+import "../styles/expenses.css";
+
 export default function Expenses() {
   const expenses = [
     {
+      id: 1,
       date: "Nov 24, 2024",
       category: "Food",
       description: "Lunch at restaurant",
       amount: "45 SAR",
     },
     {
+      id: 2,
       date: "Nov 23, 2024",
       category: "Transport",
       description: "Uber ride to mall",
       amount: "25 SAR",
     },
     {
+      id: 3,
       date: "Nov 22, 2024",
       category: "Entertainment",
       description: "Movie tickets",
       amount: "60 SAR",
     },
     {
+      id: 4,
       date: "Nov 21, 2024",
       category: "Shopping",
       description: "Grocery shopping",
       amount: "120 SAR",
     },
     {
+      id: 5,
       date: "Nov 20, 2024",
       category: "Food",
       description: "Coffee and snacks",
       amount: "18 SAR",
     },
     {
+      id: 6,
       date: "Nov 19, 2024",
       category: "Transport",
       description: "Gas station",
       amount: "95 SAR",
     },
     {
+      id: 7,
       date: "Nov 18, 2024",
       category: "Food",
       description: "Dinner with friends",
       amount: "160 SAR",
     },
     {
+      id: 8,
       date: "Nov 17, 2024",
       category: "Food",
       description: "Breakfast",
       amount: "45 SAR",
     },
     {
+      id: 9,
       date: "Nov 16, 2024",
       category: "Others",
       description: "Pharmacy items",
       amount: "85 SAR",
     },
     {
+      id: 10,
       date: "Nov 15, 2024",
       category: "Shopping",
       description: "Clothes shopping",
       amount: "200 SAR",
     },
   ];
+
+  const handleDelete = (id) => {
+    alert(`Delete expense with id: ${id}`);
+  };
 
   return (
     <div className="expenses-page">
@@ -70,10 +87,13 @@ export default function Expenses() {
           <h1>Expenses</h1>
           <p>Manage and track all your expenses</p>
         </div>
-        <button className="add-expense-btn">+ Add Expense</button>
+
+        <Link to="/expenses/add" className="add-expense-btn">
+          + Add Expense
+        </Link>
       </div>
 
-      {/* Summary cards */}
+      {/* Summary */}
       <div className="expenses-summary">
         <div className="summary-card">
           <span>Total</span>
@@ -100,8 +120,8 @@ export default function Expenses() {
           <option>All Categories</option>
         </select>
         <input type="date" />
-        <button>More Filters</button>
-        <button>Export</button>
+        <button type="button">More Filters</button>
+        <button type="button">Export</button>
         <select>
           <option>Sort by Date</option>
         </select>
@@ -119,23 +139,44 @@ export default function Expenses() {
             <th>Actions</th>
           </tr>
         </thead>
+
         <tbody>
-          {expenses.map((item, index) => (
-            <tr key={index}>
+          {expenses.map((item) => (
+            <tr key={item.id}>
               <td>
                 <input type="checkbox" />
               </td>
+
               <td>{item.date}</td>
+
               <td>
-                <span className={`category-badge ${item.category.toLowerCase()}`}>
+                <span
+                  className={`category-badge ${item.category.toLowerCase()}`}
+                >
                   {item.category}
                 </span>
               </td>
+
               <td>{item.description}</td>
               <td>{item.amount}</td>
-              <td>
-                <button>Edit</button>
-                <button>Delete</button>
+
+              <td className="actions">
+                <Link
+                  to={`/expenses/edit/${item.id}`}
+                  className="action-btn"
+                  title="Edit"
+                >
+                  ✏️
+                </Link>
+
+                <button
+                  type="button"
+                  className="action-btn"
+                  title="Delete"
+                  onClick={() => handleDelete(item.id)}
+                >
+                  🗑️
+                </button>
               </td>
             </tr>
           ))}
