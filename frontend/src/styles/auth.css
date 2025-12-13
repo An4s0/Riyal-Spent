@@ -1,0 +1,204 @@
+/* =========================
+   AUTH LAYOUT
+========================= */
+
+.full-center {
+  min-height: 100vh;
+  background: #f5f7fb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.auth-card {
+  width: 420px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.auth-card.large {
+  width: 460px;
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.auth-logo {
+  width: 52px;
+  height: 52px;
+  background: #3b82f6;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.auth-logo img {
+  filter: brightness(0) invert(1);
+}
+
+/* =========================
+   TITLES
+========================= */
+
+.auth-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+  color: #111827;
+}
+
+.auth-subtitle {
+  text-align: center;
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 6px;
+  margin-bottom: 24px;
+}
+
+/* =========================
+   FORM ELEMENTS
+========================= */
+
+.auth-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  font-size: 14px;
+  color: #111827;
+  outline: none;
+}
+
+.auth-input::placeholder {
+  color: #9ca3af;
+}
+
+.auth-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+/* =========================
+   CHECKBOX ROW
+========================= */
+
+.auth-check-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #374151;
+  margin: 14px 0 20px;
+}
+
+.auth-check-row input {
+  accent-color: #3b82f6;
+}
+
+/* =========================
+   TERMS (SIGNUP)
+========================= */
+
+.auth-terms {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 12px;
+  color: #6b7280;
+  margin: 16px 0 20px;
+}
+
+.auth-terms input {
+  margin-top: 3px;
+  accent-color: #3b82f6;
+}
+
+.auth-terms a {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.auth-terms a:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.auth-btn {
+  width: 100%;
+  padding: 12px;
+  background: #3b82f6;
+  border: none;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.auth-btn:hover {
+  background: #2563eb;
+}
+
+.auth-btn:active {
+  transform: scale(0.98);
+}
+
+/* =========================
+   ERROR
+========================= */
+
+.auth-error {
+  background: #fee2e2;
+  color: #b91c1c;
+  font-size: 13px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.auth-bottom {
+  text-align: center;
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 20px;
+}
+
+.auth-link {
+  color: #3b82f6;
+  font-weight: 500;
+  margin-left: 4px;
+  text-decoration: none;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
