@@ -1,0 +1,176 @@
+/* =======================
+   GLOBAL PAGE LAYOUT
+   ======================= */
+
+.settings-page {
+  background: #f5f7fb;
+  min-height: 100vh;
+  padding: 24px 32px;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #1f2937;
+}
+
+.settings-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.settings-header p {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* =======================
+   CARD
+   ======================= */
+
+.settings-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  margin-top: 20px;
+  max-width: 520px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+/* =======================
+   FORM
+   ======================= */
+
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.settings-form label {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.settings-form input,
+.settings-form select {
+  height: 42px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+  background: #ffffff;
+}
+
+.settings-form input:focus,
+.settings-form select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+}
+
+/* =======================
+   ACTION BUTTONS
+   ======================= */
+
+.settings-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.btn-primary {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #2563eb;
+}
+
+.btn-secondary {
+  background: #e5e7eb;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-danger {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* =======================
+   ACCOUNT SETTINGS LIST
+   ======================= */
+
+.account-settings {
+  margin-top: 28px;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 16px;
+}
+
+.account-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.account-item:hover {
+  background: #f9fafb;
+}
+
+.account-item strong {
+  font-size: 14px;
+}
+
+.account-item span {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* =======================
+   CHANGE PASSWORD PAGE
+   ======================= */
+
+.password-requirements {
+  margin-top: 16px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.password-requirements li {
+  margin-top: 6px;
+}
+
+/* =======================
+   SECURITY TIPS
+   ======================= */
+
+.security-tips {
+  margin-top: 20px;
+  background: #f1f5ff;
+  padding: 16px;
+  border-radius: 14px;
+  font-size: 13px;
+  color: #1e40af;
+}
+
+.security-tips li {
+  margin-top: 6px;
+}
