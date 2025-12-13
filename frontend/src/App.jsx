@@ -1,34 +1,67 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './styles/App.css'
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import "./styles/index.css";
+import "./styles/App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+/* Auth */
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+
+/* Main */
+import Dashboard from "./pages/Dashboard";
+import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
+import ChangePassword from "./pages/ChangePassword";
+
+/* Expenses */
+import Expenses from "./pages/Expenses";
+import AddExpense from "./pages/AddExpense";
+import EditExpense from "./pages/EditExpense";
+
+/* Categories */
+import Categories from "./pages/Categories";
+import AddCategory from "./pages/AddCategory";
+import EditCategory from "./pages/EditCategory";
+
+/* 404 */
+import NotFound from "./pages/NotFound";
+
+export default function App() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <BrowserRouter>
+      <Routes>
 
-export default App
+        {/* Default */}
+        <Route path="/" element={<Navigate to="/login" />} />
+
+        {/* Auth */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+
+        {/* Dashboard */}
+        <Route path="/dashboard" element={<Dashboard />} />
+
+        {/* Expenses */}
+        <Route path="/expenses" element={<Expenses />} />
+        <Route path="/expenses/add" element={<AddExpense />} />
+        <Route path="/expenses/edit/:id" element={<EditExpense />} />
+
+        {/* Categories */}
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/categories/add" element={<AddCategory />} />
+        <Route path="/categories/edit/:id" element={<EditCategory />} />
+
+        {/* Profile */}
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/edit" element={<EditProfile />} />
+        <Route
+          path="/profile/change-password"
+          element={<ChangePassword />}
+        />
+
+        {/* 404 */}
+        <Route path="*" element={<NotFound />} />
+
+      </Routes>
+    </BrowserRouter>
+  );
+}
