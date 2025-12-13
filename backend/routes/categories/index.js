@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-router.use("/", require("./get-categories"));
-router.use("/", require("./add-category"));
-router.use("/", require("./get-category-details"));
-router.use("/", require("./update-category"));
-router.use("/", require("./delete-category"));
+router.use("/", require("./get-all"));
+router.use("/", require("./create"));
+router.use("/", require("./get-one"));
+router.use("/", require("./update"));
+router.use("/", require("./delete"));
 
 module.exports = router;
-

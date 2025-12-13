@@ -1,9 +1,10 @@
 const express = require("express");
-const router = express.Router();
-const { DatabaseSync } = require("node:sqlite");
 const bcrypt = require("bcrypt");
-const path = require("path");
 const jwt = require("jsonwebtoken");
+
+const openDb = require("../../utils/db");
+
+const router = express.Router();
 
 router.post("/", async (req, res) => {
   try {
@@ -12,17 +13,21 @@ router.post("/", async (req, res) => {
 
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
       errors.email = "Invalid email format";
+
     if (!password) errors.password = "Password is required";
 
     if (Object.keys(errors).length)
       return res.status(400).json({ message: "Validation error", errors });
 
-    const db = new DatabaseSync(path.join(__dirname, "../../riyal-spent.db"));
+    const db = openDb();
 
     const user = db
       .prepare(
-        `SELECT user_id, full_name, email, password_hash, member_since, preferred_currency
-         FROM users WHERE email = ?`
+        `
+        SELECT user_id, full_name, email, password_hash, member_since, preferred_currency
+        FROM users
+        WHERE email = ?
+        `
       )
       .get(email);
 
@@ -32,7 +37,6 @@ router.post("/", async (req, res) => {
         .json({ message: "Email or password is incorrect" });
 
     const validPass = await bcrypt.compare(password, user.password_hash);
-
     if (!validPass)
       return res
         .status(400)

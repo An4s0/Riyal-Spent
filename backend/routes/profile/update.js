@@ -1,27 +1,13 @@
 const express = require("express");
+
+const openDb = require("../../utils/db");
+const { getUserFromToken } = require("../../utils/auth");
+
 const router = express.Router();
-const { DatabaseSync } = require("node:sqlite");
-const path = require("path");
-const jwt = require("jsonwebtoken");
 
 router.put("/", async (req, res) => {
   try {
-    const header = req.headers.authorization;
-    if (!header || !header.startsWith("Bearer ")) {
-      return res.status(401).json({ message: "Missing or invalid token" });
-    }
-
-    const token = header.split(" ")[1];
-
-    let decoded;
-    try {
-      decoded = jwt.verify(token, process.env.JWT_SECRET);
-    } catch (err) {
-      return res.status(401).json({ message: "Invalid or expired token" });
-    }
-
-    const user_id = decoded.user_id;
-
+    const { user_id } = getUserFromToken(req);
     const { full_name, email, preferred_currency } = req.body;
     const errors = {};
 
@@ -37,12 +23,15 @@ router.put("/", async (req, res) => {
     if (Object.keys(errors).length)
       return res.status(400).json({ message: "Validation error", errors });
 
-    const db = new DatabaseSync(path.join(__dirname, "../../riyal-spent.db"));
+    const db = openDb();
 
     const user = db
       .prepare(
-        `SELECT full_name, email, preferred_currency 
-         FROM users WHERE user_id = ?`
+        `
+        SELECT full_name, email, preferred_currency
+        FROM users
+        WHERE user_id = ?
+        `
       )
       .get(user_id);
 
@@ -67,7 +56,7 @@ router.put("/", async (req, res) => {
       UPDATE users
       SET full_name = ?, email = ?, preferred_currency = ?, last_activity = ?
       WHERE user_id = ?
-    `
+      `
     ).run(newName, newEmail, newCurrency, now, user_id);
 
     res.status(200).json({
@@ -82,7 +71,7 @@ router.put("/", async (req, res) => {
     });
   } catch (err) {
     console.error("PUT /profile error:", err);
-    return res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: "Server error" });
   }
 });
 
