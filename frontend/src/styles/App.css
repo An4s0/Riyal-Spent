@@ -1,0 +1,301 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* =========================
+   COMMON
+========================= */
+
+.page {
+  padding: 32px;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+/* =========================
+   HEADERS
+========================= */
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+h1 {
+  font-size: 28px;
+  margin: 0;
+}
+
+p {
+  margin-top: 6px;
+  color: #6b7280;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn-primary {
+  background: #3b82f6;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background: white;
+  border: 1px solid #e5e7eb;
+  padding: 12px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn-danger {
+  background: #ef4444;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 10px;
+}
+
+/* =========================
+   EXPENSES
+========================= */
+
+.expenses-page {
+  padding: 32px;
+}
+
+.expenses-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-expense-btn {
+  background: #3b82f6;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 12px;
+}
+
+.expenses-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.summary-card {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+}
+
+.summary-card span {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.summary-card strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 20px;
+}
+
+/* =========================
+   FILTERS
+========================= */
+
+.expenses-filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.expenses-filters input,
+.expenses-filters select,
+.expenses-filters button {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: white;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.expenses-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.expenses-table th,
+.expenses-table td {
+  padding: 14px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 14px;
+  text-align: left;
+}
+
+.expenses-table th {
+  color: #6b7280;
+}
+
+/* =========================
+   CATEGORY BADGES
+========================= */
+
+.category-badge {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.category-badge.food {
+  background: #ffedd5;
+  color: #f97316;
+}
+
+.category-badge.transport {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.category-badge.entertainment {
+  background: #ede9fe;
+  color: #7c3aed;
+}
+
+.category-badge.shopping {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.category-badge.others {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+/* =========================
+   FORMS
+========================= */
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* =========================
+   CATEGORIES
+========================= */
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.category-card {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+}
+
+/* =========================
+   404
+========================= */
+
+.notfound-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.notfound-content {
+  text-align: center;
+}
+
+.notfound-content h1 {
+  font-size: 72px;
+  margin: 0;
+}
+
+.notfound-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
