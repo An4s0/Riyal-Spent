@@ -1,33 +1,48 @@
+import { useNavigate } from "react-router-dom";
+import "../styles/expenses.css";
+
 export default function AddExpense() {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert("Expense added successfully");
+    navigate("/expenses");
+  };
+
   return (
-    <div className="add-expense-page">
+    <div className="expenses-page">
       {/* Header */}
-      <div className="add-expense-header">
+      <div className="expenses-header">
         <div>
           <h1>Add New Expense</h1>
-          <p>Create a new expense record for your budget tracking</p>
+          <p>Create a new expense record</p>
         </div>
 
-        <button className="back-btn">← Back to Expenses</button>
+        <button
+          type="button"
+          className="add-expense-btn"
+          onClick={() => navigate("/expenses")}
+        >
+          ← Back
+        </button>
       </div>
 
-      {/* Form Card */}
-      <div className="add-expense-card">
-        {/* Amount */}
-        <div className="form-group">
-          <label>
-            Amount <span>*</span>
-          </label>
-          <input type="number" placeholder="SAR 0.00" />
+      {/* Form */}
+      <form className="summary-card" onSubmit={handleSubmit}>
+        <div style={{ marginBottom: "16px" }}>
+          <label>Amount *</label>
+          <input
+            type="number"
+            placeholder="SAR 0.00"
+            required
+          />
         </div>
 
-        {/* Category */}
-        <div className="form-group">
-          <label>
-            Category <span>*</span>
-          </label>
-          <select>
-            <option>Select a category</option>
+        <div style={{ marginBottom: "16px" }}>
+          <label>Category *</label>
+          <select required>
+            <option value="">Select category</option>
             <option>Food</option>
             <option>Transport</option>
             <option>Entertainment</option>
@@ -36,41 +51,39 @@ export default function AddExpense() {
           </select>
         </div>
 
-        {/* Date */}
-        <div className="form-group">
-          <label>
-            Date <span>*</span>
-          </label>
-          <input type="date" />
+        <div style={{ marginBottom: "16px" }}>
+          <label>Date *</label>
+          <input type="date" required />
         </div>
 
-        {/* Description */}
-        <div className="form-group">
+        <div style={{ marginBottom: "24px" }}>
           <label>Description</label>
           <textarea
-            placeholder="Enter a description for this expense (optional)"
-            maxLength={200}
+            rows="3"
+            placeholder="Enter description (optional)"
           />
-          <small>Maximum 200 characters</small>
         </div>
 
         {/* Actions */}
-        <div className="form-actions">
-          <button className="cancel-btn">Cancel</button>
-          <button className="save-btn">Save Expense</button>
-        </div>
-      </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            gap: "12px",
+          }}
+        >
+          <button
+            type="button"
+            onClick={() => navigate("/expenses")}
+          >
+            Cancel
+          </button>
 
-      {/* Recent Categories */}
-      <div className="recent-categories">
-        <h3>Recent Categories</h3>
-        <div className="category-tags">
-          <span className="category food">Food</span>
-          <span className="category transport">Transport</span>
-          <span className="category entertainment">Entertainment</span>
-          <span className="category shopping">Shopping</span>
+          <button type="submit" className="add-expense-btn">
+            💾 Save Expense
+          </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

@@ -1,58 +1,46 @@
 import { useNavigate } from "react-router-dom";
+import "../styles/expenses.css";
 
 export default function NotFound() {
   const navigate = useNavigate();
 
   return (
-    <div className="notfound-page">
-      {/* Content */}
-      <div className="notfound-content">
-        <div className="notfound-icon">⚠️</div>
-
-        <h1>404</h1>
-        <h2>Page Not Found</h2>
-
-        <p>
-          Oops! The page you're looking for doesn't exist.
-          <br />
-          It might have been moved or deleted.
+    <div
+      className="expenses-page"
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+      }}
+    >
+      <div className="summary-card" style={{ maxWidth: "420px" }}>
+        <h1 style={{ fontSize: "64px", margin: "0" }}>404</h1>
+        <p style={{ marginBottom: "20px", color: "#6b7280" }}>
+          Page not found
         </p>
 
-        {/* Actions */}
-        <div className="notfound-actions">
+        <p style={{ marginBottom: "24px" }}>
+          The page you are looking for doesn’t exist or has been moved.
+        </p>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: "12px",
+          }}
+        >
           <button
-            className="btn-primary"
-            onClick={() => navigate("/dashboard")}
+            className="add-expense-btn"
+            onClick={() => navigate("/expenses")}
           >
-            Back to Home
+            Go to Expenses
           </button>
 
-          <button className="btn-secondary" onClick={() => navigate(-1)}>
+          <button onClick={() => navigate(-1)}>
             Go Back
           </button>
-        </div>
-
-        {/* Suggestions */}
-        <div className="notfound-suggestions">
-          <h3>You might want to:</h3>
-
-          <div className="suggestions-grid">
-            <button onClick={() => navigate("/dashboard")}>
-              View Dashboard
-            </button>
-
-            <button onClick={() => navigate("/expenses")}>
-              View Expenses
-            </button>
-
-            <button onClick={() => navigate("/categories")}>
-              View Categories
-            </button>
-
-            <button onClick={() => navigate("/profile")}>
-              View Profile
-            </button>
-          </div>
         </div>
       </div>
     </div>

@@ -1,110 +1,86 @@
+import { Link } from "react-router-dom";
+import "../styles/expenses.css";
+
 export default function Categories() {
   const categories = [
-    {
-      name: "Food",
-      description: "Restaurants, groceries, snacks",
-      transactions: 47,
-    },
-    {
-      name: "Transport",
-      description: "Uber, bus, taxi, fuel",
-      transactions: 23,
-    },
-    {
-      name: "Entertainment",
-      description: "Movies, games, events",
-      transactions: 18,
-    },
-    {
-      name: "Shopping",
-      description: "Clothes, electronics, books",
-      transactions: 15,
-    },
-    {
-      name: "Healthcare",
-      description: "Doctor, pharmacy, insurance",
-      transactions: 8,
-    },
-    {
-      name: "Education",
-      description: "Books, courses, supplies",
-      transactions: 12,
-    },
-    {
-      name: "Bills",
-      description: "Utilities, phone, internet",
-      transactions: 6,
-    },
-    {
-      name: "Others",
-      description: "Miscellaneous expenses",
-      transactions: 3,
-    },
+    { id: 1, name: "Food", color: "food", count: 18 },
+    { id: 2, name: "Transport", color: "transport", count: 9 },
+    { id: 3, name: "Entertainment", color: "entertainment", count: 6 },
+    { id: 4, name: "Shopping", color: "shopping", count: 11 },
+    { id: 5, name: "Others", color: "others", count: 3 },
   ];
 
+  const handleDelete = (id) => {
+    if (confirm("Delete this category?")) {
+      alert(`Category ${id} deleted`);
+    }
+  };
+
   return (
-    <div className="categories-page">
+    <div className="expenses-page">
       {/* Header */}
-      <div className="categories-header">
+      <div className="expenses-header">
         <div>
           <h1>Categories</h1>
-          <p>
-            Manage your expense categories and customize your spending
-            organization
-          </p>
+          <p>Manage your expense categories</p>
         </div>
 
-        <button className="add-category-btn">+ Add Category</button>
+        <Link to="/categories/add" className="add-expense-btn">
+          + Add Category
+        </Link>
       </div>
 
-      {/* Summary Cards */}
-      <div className="categories-summary">
-        <div className="summary-card">
-          <span>Total Categories</span>
-          <strong>8</strong>
-        </div>
+      {/* Categories Grid */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: "16px",
+        }}
+      >
+        {categories.map((cat) => (
+          <div key={cat.id} className="summary-card">
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: "12px",
+              }}
+            >
+              <span
+                className={`category-badge ${cat.color}`}
+                style={{ fontSize: "13px" }}
+              >
+                {cat.name}
+              </span>
 
-        <div className="summary-card">
-          <span>Most Used</span>
-          <strong>Food</strong>
-        </div>
+              <div>
+                <Link
+                  to={`/categories/edit/${cat.id}`}
+                  className="action-btn"
+                  title="Edit"
+                  style={{ marginRight: "8px" }}
+                >
+                  ✏️
+                </Link>
 
-        <div className="summary-card">
-          <span>This Month</span>
-          <strong>6</strong>
-        </div>
-      </div>
-
-      {/* All Categories */}
-      <div className="categories-section">
-        <div className="categories-section-header">
-          <h2>All Categories</h2>
-
-          <div className="categories-filters">
-            <input type="text" placeholder="Search categories..." />
-            <select>
-              <option>All Status</option>
-            </select>
-          </div>
-        </div>
-
-        <div className="categories-grid">
-          {categories.map((cat, index) => (
-            <div className="category-card" key={index}>
-              <div className="category-card-header">
-                <div className="category-icon">■</div>
-                <div className="category-actions">
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </div>
+                <button
+                  type="button"
+                  className="action-btn"
+                  title="Delete"
+                  onClick={() => handleDelete(cat.id)}
+                >
+                  🗑️
+                </button>
               </div>
-
-              <h3>{cat.name}</h3>
-              <p>{cat.description}</p>
-              <span>{cat.transactions} transactions</span>
             </div>
-          ))}
-        </div>
+
+            <p style={{ fontSize: "14px", color: "#6b7280" }}>
+              {cat.count} expenses
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   );
