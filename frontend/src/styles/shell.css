@@ -1,0 +1,71 @@
+.shell{
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+.sidebar{
+  background: #fff;
+  border-right: 1px solid var(--border);
+  padding: 18px 14px;
+}
+
+.brand{
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 10px 18px;
+}
+
+.brandLogo{
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.brandName{
+  font-weight: 700;
+}
+
+.nav{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 6px 8px;
+}
+
+.navItem{
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: #374151;
+  font-weight: 500;
+  display: block;
+}
+
+.navItem.active{
+  background: var(--blue);
+  color: #fff;
+}
+
+.content{
+  padding: 28px 30px;
+}
+
+.pageHeader{
+  display:flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.pageTitle{
+  margin: 0;
+  font-size: 28px;
+}
+
+.pageSub{
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
