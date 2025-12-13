@@ -1,37 +1,50 @@
+import { useState } from "react";
+import api from "../api/api";
 import "../styles/changePassword.css";
 
 export default function ChangePassword() {
+  const [current, setCurrent] = useState("");
+  const [next, setNext] = useState("");
+  const [msg, setMsg] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setMsg("");
+
+    try {
+      await api.post("/auth/change-password", {
+        current_password: current,
+        new_password: next,
+      });
+      setMsg("Password updated successfully");
+    } catch {
+      setMsg("Failed to update password");
+    }
+  };
+
   return (
     <div className="change-password-container">
+      <h1>Change Password</h1>
 
-      <div className="cp-header">
-        <h1>Change Password</h1>
-        <p>Update your account password</p>
-      </div>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="password"
+          placeholder="Current Password"
+          value={current}
+          onChange={(e) => setCurrent(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="New Password"
+          value={next}
+          onChange={(e) => setNext(e.target.value)}
+        />
 
-      <div className="cp-card">
+        <button>Update Password</button>
+      </form>
 
-        <div className="form-group">
-          <label>Current Password</label>
-          <input type="password" placeholder="Enter current password" />
-        </div>
-
-        <div className="form-group">
-          <label>New Password</label>
-          <input type="password" placeholder="Enter new password" />
-        </div>
-
-        <div className="form-group">
-          <label>Confirm New Password</label>
-          <input type="password" placeholder="Confirm new password" />
-        </div>
-
-        <div className="cp-actions">
-          <button className="btn-primary">Update Password</button>
-          <button className="btn-secondary">Cancel</button>
-        </div>
-
-      </div>
+      {msg && <p>{msg}</p>}
     </div>
   );
 }
+
