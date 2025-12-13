@@ -1,0 +1,92 @@
+.edit-profile-page {
+  background: #f5f7fb;
+  min-height: 100vh;
+  padding: 30px;
+}
+
+.edit-profile-card {
+  background: white;
+  max-width: 540px;
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+.edit-profile-card h1 {
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+
+.edit-profile-card p {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+.edit-group {
+  margin-bottom: 16px;
+}
+
+.edit-group label {
+  font-size: 13px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.edit-group input,
+.edit-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+/* Buttons */
+.edit-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.btn-save {
+  background: #3b82f6;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-cancel {
+  background: #e5e7eb;
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-danger {
+  margin-top: 16px;
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Account settings */
+.account-settings {
+  margin-top: 32px;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 20px;
+}
+
+.account-settings a {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #3b82f6;
+  text-decoration: none;
+}
