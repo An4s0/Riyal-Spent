@@ -14,10 +14,14 @@ export default function Login() {
     setError("");
 
     try {
-      const res = await api.post("/auth/login", { email, password });
+      const res = await api.post("/auth/login", {
+        email,
+        password,
+      });
+
       localStorage.setItem("token", res.data.token);
       navigate("/dashboard");
-    } catch (err) {
+    } catch {
       setError("Invalid email or password");
     }
   };
@@ -25,9 +29,9 @@ export default function Login() {
   return (
     <div className="full-center">
       <div className="auth-card">
-        
+
         <div className="auth-logo">
-          <img src="/logo.svg" alt="icon" width="28" />
+          <img src="/logo.svg" alt="logo" width="28" />
         </div>
 
         <h1 className="auth-title">Riyal Spent</h1>
@@ -38,7 +42,6 @@ export default function Login() {
         {error && <p className="auth-error">{error}</p>}
 
         <form onSubmit={handleLogin}>
-
           <label className="auth-label">Email Address</label>
           <input
             className="auth-input"
@@ -48,9 +51,7 @@ export default function Login() {
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <label className="auth-label" style={{ marginTop: "14px" }}>
-            Password
-          </label>
+          <label className="auth-label">Password</label>
           <input
             className="auth-input"
             type="password"
@@ -59,19 +60,13 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <div className="auth-check-row">
-            <input type="checkbox" />
-            <label>Remember me</label>
-          </div>
-
-          <button className="auth-btn" type="submit">Login</button>
+          <button className="auth-btn">Login</button>
         </form>
 
         <p className="auth-bottom">
           Don’t have an account?
-          <Link to="/signup" className="auth-link">Sign up</Link>
+          <Link to="/signup" className="auth-link"> Sign up</Link>
         </p>
-
       </div>
     </div>
   );
