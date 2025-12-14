@@ -1,10 +1,11 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+// استيراد useNavigate و NavLink من react-router-dom
+import { NavLink, Link, useNavigate } from 'react-router-dom'; 
 import { 
     LayoutDashboard, Wallet, Boxes, User, 
     Edit3, Lock, LogOut 
 } from 'lucide-react';
-// import './index.css'; // للتنسيقات العامة
+
 import './Profile.css';
 
 // --- البيانات الوهمية (Mock Data) ---
@@ -23,7 +24,7 @@ const sidebarItems = [
     { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
     { name: 'Expenses', path: '/expenses', icon: Wallet },
     { name: 'Categories', path: '/categories', icon: Boxes },
-    { name: 'Profile', path: '/profile', icon: User }, // المسار النشط
+    { name: 'Profile', path: '/profile', icon: User },
 ];
 
 // ----------------------------------------------------
@@ -38,8 +39,7 @@ const Sidebar = () => {
                     <NavLink
                         key={item.name}
                         to={item.path}
-                        className={({ isActive }) => 
-                            // تفعيل فئة 'active' للملف الشخصي
+                        className={
                             item.name === 'Profile' ? "nav-item active" : "nav-item"
                         }
                     >
@@ -54,6 +54,23 @@ const Sidebar = () => {
 // ----------------------------------------------------
 
 const Profile = () => {
+    // 1. استدعاء useNavigate للتحكم في إعادة التوجيه
+    const navigate = useNavigate();
+
+    // *** الدالة التي تعالج عملية تسجيل الخروج الحقيقية ***
+    const handleLogout = () => {
+        // 1. مسح أي بيانات جلسة أو توكنات (خطوة ضرورية)
+        console.log('Clearing session data...');
+        // مثال: localStorage.removeItem('authToken'); 
+        // مثال: setAuthState(null); // إذا كنت تستخدم Redux/Context
+
+        // 2. إعادة توجيه المستخدم إلى صفحة تسجيل الدخول /login
+        navigate('/login'); 
+        
+        console.log('Logout successful! Redirecting to /login...');
+    };
+    // ************************************************
+
     return (
         <div className="app-layout">
             <Sidebar /> 
@@ -78,14 +95,10 @@ const Profile = () => {
                     {/* معلومات الملف الشخصي (Profile Information) */}
                     <h4 className="section-title">Profile Information</h4>
                     <div className="profile-info-grid">
-                        
-                        {/* Full Name */}
                         <div className="info-item">
                             <label>Full Name</label>
                             <p className="info-value">{userData.fullName}</p>
                         </div>
-                        
-                        {/* Email Address */}
                         <div className="info-item">
                             <label>Email Address</label>
                             <p className="info-value">{userData.email}</p>
@@ -95,26 +108,18 @@ const Profile = () => {
                     {/* إحصائيات الحساب (Account Statistics) */}
                     <h4 className="section-title">Account Statistics</h4>
                     <div className="stats-grid">
-                        
-                        {/* Total Expenses */}
                         <div className="stat-item">
                             <label>Total Expenses</label>
                             <p className="stat-value">{userData.totalExpenses}</p>
                         </div>
-                        
-                        {/* Categories Used */}
                         <div className="stat-item">
                             <label>Categories Used</label>
                             <p className="stat-value">{userData.categoriesUsed}</p>
                         </div>
-                        
-                        {/* Total Transactions */}
                         <div className="stat-item">
                             <label>Total Transactions</label>
                             <p className="stat-value">{userData.totalTransactions}</p>
                         </div>
-                        
-                        {/* Last Activity */}
                         <div className="stat-item">
                             <label>Last Activity</label>
                             <p className="stat-value">{userData.lastActivity}</p>
@@ -126,7 +131,7 @@ const Profile = () => {
                 <div className="account-actions-panel">
                     <h4 className="section-title">Account Actions</h4>
                     
-                    {/* Edit Profile - مرتبط بمسار /profile/edit */}
+                    {/* Edit Profile */}
                     <Link to="/profile/edit" className="action-item edit-action">
                         <div className="action-details">
                             <Edit3 size={20} className="action-icon blue-icon" />
@@ -138,7 +143,7 @@ const Profile = () => {
                         <span className="arrow-icon">&gt;</span>
                     </Link>
 
-                    {/* Change Password - مرتبط بمسار /profile/password */}
+                    {/* Change Password */}
                     <Link to="/profile/password" className="action-item password-action">
                         <div className="action-details">
                             <Lock size={20} className="action-icon orange-icon" />
@@ -150,8 +155,8 @@ const Profile = () => {
                         <span className="arrow-icon">&gt;</span>
                     </Link>
 
-                    {/* Logout */}
-                    <button className="action-item logout-action" onClick={() => console.log('Logging out...')}>
+                    {/* Logout - تم ربطه بالدالة handleLogout لإعادة التوجيه */}
+                    <button className="action-item logout-action" onClick={handleLogout}>
                         <div className="action-details">
                             <LogOut size={20} className="action-icon red-icon" />
                             <div>
