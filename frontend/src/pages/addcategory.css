@@ -1,0 +1,231 @@
+/* --- AddCategory.css (FINAL CLEANED VERSION) --- */
+
+/* ---------------------------------------------------- */
+/* 0. التخطيط الرئيسي (Basic Layout - Sidebar & Main Content) */
+/* ---------------------------------------------------- */
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f6f8; 
+}
+.sidebar {
+    width: 250px;
+    background-color: #ffffff;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+    flex-shrink: 0;
+}
+.main-content {
+    flex-grow: 1;
+    padding: 30px;
+    overflow-y: auto; 
+}
+
+/* ---------------------------------------------------- */
+/* 1. Header and Panel */
+/* ---------------------------------------------------- */
+.category-form-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+.category-form-header h2 { font-size: 28px; color: #1f2937; margin-bottom: 2px; }
+
+.back-link { 
+    color: #4b5563; 
+    padding: 5px; 
+    border-radius: 50%; 
+    text-decoration: none; 
+}
+.back-link:hover { background-color: #e5e7eb; }
+
+.category-form-panel {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    max-width: 600px; 
+}
+
+/* ---------------------------------------------------- */
+/* 2. Form Fields (Input) */
+/* ---------------------------------------------------- */
+.form-group {
+    margin-bottom: 25px;
+}
+.form-group label {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 5px;
+}
+.field-hint {
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 10px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px; /* تأكيد زوايا الحقل */
+    font-size: 15px;
+    transition: border-color 0.2s;
+}
+.form-group input:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+
+/* ---------------------------------------------------- */
+/* 3. Icon Selector Grid */
+/* ---------------------------------------------------- */
+.icon-selector-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* مسافة 10px بين الأيقونات */
+}
+
+.icon-option {
+    width: 45px; /* تصغير الأيقونة قليلاً لتطابق الصورة */
+    height: 45px;
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px; /* زوايا أقل استدارة */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #4b5563;
+    flex-shrink: 0;
+}
+
+.icon-option:hover {
+    border-color: #4a90e2;
+    background-color: #e0f2fe;
+    color: #4a90e2;
+}
+
+.icon-option.selected {
+    border-color: #4a90e2;
+    background-color: #4a90e2;
+    color: #fff;
+    box-shadow: 0 0 0 3px #e0f2fe; /* تأثير التحديد */
+}
+
+
+/* ---------------------------------------------------- */
+/* 4. Color Selector Grid */
+/* ---------------------------------------------------- */
+.color-selector-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.color-option {
+    width: 30px; /* حجم اللون أصغر قليلاً */
+    height: 30px;
+    border-radius: 50%;
+    border: 3px solid #fff; 
+    box-shadow: 0 0 0 1px #e5e7eb; 
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.color-option.selected {
+    box-shadow: 0 0 0 3px #4a90e2; /* حدود زرقاء عند الاختيار */
+    transform: scale(1.1);
+}
+
+
+/* ---------------------------------------------------- */
+/* 5. Preview */
+/* ---------------------------------------------------- */
+.category-preview-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: #f9fafb;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+}
+
+.preview-icon-bg {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.preview-name {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+
+/* ---------------------------------------------------- */
+/* 6. Form Actions Buttons */
+/* ---------------------------------------------------- */
+.form-actions-category {
+    display: flex;
+    justify-content: flex-end; /* الأزرار على اليمين */
+    align-items: center;
+    gap: 15px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
+    margin-top: 30px;
+}
+
+.btn-primary-category {
+    background-color: #4a90e2;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.btn-primary-category:hover:not(:disabled) { background-color: #3b7cdb; }
+.btn-primary-category:disabled {
+    background-color: #a8c8e8;
+    cursor: not-allowed;
+}
+
+.btn-cancel {
+    background: none;
+    color: #6b7280;
+    padding: 10px 15px;
+    border: none;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.btn-cancel:hover { color: #1f2937; }
+
+/* ---------------------------------------------------- */
+/* Media Queries */
+/* ---------------------------------------------------- */
+@media (max-width: 600px) {
+    .form-actions-category {
+        flex-direction: column-reverse;
+    }
+    .btn-primary-category, .btn-cancel {
+        width: 100%;
+    }
+}

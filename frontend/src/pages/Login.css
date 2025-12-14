@@ -1,0 +1,158 @@
+/* --- Login.css (FINAL CLEAN FLEXBOX VERSION - Larger Square Card) --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+/* Global body style: إزالة التوسيط من body والاعتماد على الحاوية */
+body {
+    background-color: #f4f6f9;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    direction: ltr; 
+    text-align: left;
+}
+
+/* ================================================= */
+/* ⬅️ الحل القاطع للتوسيط: حاوية التوسيط القسري */
+/* ================================================= */
+.login-page-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    
+    /* Flexbox لتوسيط البطاقة */
+    display: flex;
+    justify-content: center; /* توسيط أفقي */
+    align-items: center;    /* توسيط رأسي */
+    
+    margin: 0;
+    padding: 0;
+}
+
+
+/* 1. تصميم البطاقة (Card) والخطوط */
+.login-card {
+    width: 450px; 
+    background-color: #fff;
+    padding: 60px; 
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+.logo-container { display: flex; justify-content: center; margin-bottom: 30px; }
+.logo { 
+    background-color: transparent; 
+    background-image: url('./photo01.png'); 
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 60px; height: 60px; padding: 0; border-radius: 15px;
+}
+.logo svg { display: none; }
+h1 { font-size: 28px; color: #1f2937; margin-bottom: 5px; font-weight: 700; }
+.subtitle { font-size: 16px; color: #6b7280; margin-bottom: 35px; }
+
+
+/* --- 4. حقول الإدخال: Flexbox مع الفصل وتثبيت الحجم والارتفاع --- */
+.form-group {
+    margin-bottom: 20px; 
+    text-align: left; 
+}
+.form-group label {
+    display: block;
+    font-size: 14px;
+    color: #374151;
+    margin-bottom: 6px; 
+    font-weight: 600;
+}
+.input-wrapper {
+    position: relative;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    display: flex; /* Flex container */
+    align-items: center;
+    padding-right: 15px; 
+}
+.input-wrapper:focus-within { border-color: #4a90e2; }
+
+.input-wrapper::after { display: none !important; }
+
+/* الأيقونة: تثبيت الحجم والفصل بـ margin-right */
+.input-icon {
+    color: #9ca3af;
+    width: 18px !important; 
+    height: 18px !important; 
+    margin-left: 20px; 
+    margin-right: 25px; /* المسافة التي تفصل الأيقونة عن النص */
+    flex-shrink: 0; 
+    position: static;
+    top: auto;
+    transform: none;
+}
+
+/* حقل الإدخال: زيادة الـ padding لزيادة الطول */
+.input-field {
+    flex-grow: 1; 
+    padding: 14px 0 14px 0; /* تم تثبيت الارتفاع عند 14px */
+    border: none; 
+    border-radius: 0; 
+    font-size: 14px;
+    color: #1f2937;
+    outline: none;
+    background-color: transparent; 
+}
+.input-field:focus {
+    border-color: transparent; 
+}
+
+/* أيقونة العين (Eyes Icon) - حجم ثابت و Absolute */
+.eye-icon {
+    position: absolute;
+    right: 15px;
+    width: 18px !important; 
+    height: 18px !important;
+    color: #9ca3af;
+    cursor: pointer;
+    z-index: 10;
+    transition: color 0.2s;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.eye-icon:hover { color: #4a90e2; }
+
+/* 5. تنسيقات إضافية */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 14px;
+    color: #374151;
+    margin-bottom: 25px; 
+}
+.checkbox-group input[type="checkbox"] { margin-right: 8px; }
+.checkbox-group label { font-weight: 400; }
+
+.login-btn {
+    width: 100%;
+    padding: 14px; 
+    background-color: #4a90e2;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-shadow: 0 4px 10px rgba(74, 144, 226, 0.3);
+}
+.login-btn:hover { background-color: #3a7bd5; }
+
+.footer-text {
+    margin-top: 25px;
+    font-size: 14px;
+    color: #6b7280;
+}
+.signup-link {
+    color: #4a90e2;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 5px;
+}

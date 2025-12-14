@@ -1,0 +1,444 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* 0. إعادة ضبط شاملة وحاسمة */
+*, *::before, *::after {
+    box-sizing: border-box; 
+}
+body, html, #root { 
+    height: 100%;       
+    margin: 0;          
+    padding: 0;
+    width: 100%;        
+    overflow-x: hidden !important; 
+    font-family: 'Inter', sans-serif;
+}
+
+/* ==================================== */
+/* 1. التخطيط العام (App Layout) */
+/* ==================================== */
+.app-layout {
+    display: flex;
+    width: 100%;    
+    min-height: 100vh; 
+    background-color: #f4f6f9; 
+}
+.main-content {
+    flex-grow: 1; 
+    padding: 30px 40px; 
+    overflow-y: auto; 
+    min-width: 0; 
+}
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.dashboard-header h2 {
+    font-size: 30px; 
+    color: #1f2937;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+.header-subtitle {
+    font-size: 16px;
+    color: #6b7280;
+}
+.add-expense-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background-color: #4a90e2; /* أزرق موحد */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.add-expense-btn:hover {
+    background-color: #3a7bd5;
+}
+
+/* ==================================== */
+/* 2. الشريط الجانبي (Sidebar) */
+/* ==================================== */
+.sidebar {
+    width: 250px; 
+    min-width: 250px; 
+    background-color: #fff;
+    padding: 30px 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+    flex-shrink: 0; 
+    min-height: 100vh; 
+    overflow-y: auto; 
+}
+.sidebar-logo {
+    color: #1f2937;
+    font-size: 24px; 
+    font-weight: 700;
+    margin-bottom: 40px;
+    padding-left: 10px;
+}
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; 
+}
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    color: #6b7280;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 16px; 
+    font-weight: 500;
+    transition: all 0.2s;
+}
+.nav-item:hover {
+    background-color: #f0f2f5;
+    color: #1f2937;
+}
+.nav-item.active {
+    background-color: #4a90e2; /* خلفية زرقاء صلبة */
+    color: #fff; 
+    font-weight: 600;
+}
+.nav-item.active svg {
+    color: #fff; 
+}
+
+/* ==================================== */
+/* 3. بطاقات الملخص (Summary Cards) */
+/* ==================================== */
+.summary-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* تخطيط متجاوب */
+    gap: 15px; 
+    margin-bottom: 30px;
+}
+.four-columns {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* 4 أعمدة في الشاشات الكبيرة */
+}
+.expense-summary-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+.expense-summary-card .card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.expense-summary-card .card-title {
+    font-size: 14px;
+    color: #6b7280;
+    font-weight: 500;
+}
+.expense-summary-card .card-value {
+    font-size: 20px;
+    font-weight: 700;
+}
+.expense-summary-card .card-icon-container {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* الألوان محددة في الكود JSX بواسطة inline style */
+}
+
+/* ==================================== */
+/* 4. شريط التحكم والفلترة (Controls Panel) */
+/* ==================================== */
+.controls-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* لضمان التجاوب */
+    gap: 15px;
+}
+.search-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 8px 12px;
+    flex-grow: 1; /* للسماح لشريط البحث بالتمدد */
+    max-width: 300px;
+}
+.search-icon {
+    margin-right: 8px;
+}
+.search-input {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    width: 100%;
+}
+.filter-sort-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.control-select, 
+.control-button,
+.date-input-wrapper {
+    padding: 8px 15px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.control-button {
+    gap: 5px;
+    color: #4a90e2;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+.control-button:hover {
+    background-color: #f0f2f5;
+}
+.control-input {
+    border: none;
+    outline: none;
+    padding: 0;
+    font-size: 14px;
+    width: 100%;
+}
+
+/* ==================================== */
+/* 5. الجدول (Table) */
+/* ==================================== */
+.table-panel {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+}
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto; 
+}
+.expenses-table {
+    width: 100%;
+    min-width: 800px; 
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+.expenses-table thead tr {
+    background-color: #fff;
+    color: #6b7280;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+.expenses-table thead th {
+    padding: 15px 10px;
+    text-align: left;
+}
+.expenses-table tbody td {
+    padding: 15px 10px;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 500;
+}
+.expenses-table tbody tr {
+    transition: background-color 0.2s;
+    border-bottom: 1px solid #f0f0f0;
+}
+.expenses-table tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+.checkbox-col {
+    width: 30px;
+    padding-left: 15px !important;
+    text-align: center;
+}
+.checkbox-col input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #4a90e2; /* لون مربع التحديد */
+    cursor: pointer;
+}
+
+.category-tag {
+    display: flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    width: fit-content;
+}
+
+.amount-cell {
+    font-weight: 700;
+    color: #1f2937; 
+}
+.text-right {
+    text-align: right !important;
+    padding-right: 20px !important;
+}
+
+.actions-cell {
+    text-align: center;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 5px;
+    padding: 5px;
+    transition: color 0.2s;
+    outline: none;
+    display: inline-block;
+}
+.action-btn svg {
+    width: 16px;
+    height: 16px;
+}
+.edit-btn { color: #6b7280; }
+.delete-btn { color: #dc3545; }
+.edit-btn:hover { color: #4a90e2; }
+.delete-btn:hover { color: #a00; }
+
+/* ==================================== */
+/* 6. التنقل بين الصفحات (Pagination) */
+/* ==================================== */
+.pagination-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid #f0f0f0;
+}
+.pagination-info {
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 500;
+}
+.pagination-controls {
+    display: flex;
+    gap: 5px;
+}
+.page-btn {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    color: #6b7280;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+.page-btn.active {
+    background-color: #4a90e2;
+    color: #fff;
+    border-color: #4a90e2;
+}
+.page-btn:not(.active):hover {
+    background-color: #f0f2f5;
+}
+.page-btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ==================================== */
+/* 7. التجاوب (Media Queries) */
+/* ==================================== */
+@media (max-width: 1024px) {
+    .main-content {
+        padding: 20px;
+    }
+    .four-columns {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+    .filter-sort-group {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    .search-group {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .app-layout {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        min-width: 100%;
+        height: auto;
+        padding: 15px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .sidebar-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 10px;
+    }
+    .sidebar-logo {
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    .nav-item span {
+        display: none; 
+    }
+    .nav-item {
+        padding: 10px;
+        min-width: 45px;
+        justify-content: center;
+    }
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .add-expense-btn {
+        margin-top: 15px;
+        width: 100%;
+        justify-content: center;
+    }
+    .controls-panel {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .filter-sort-group {
+        flex-direction: column;
+    }
+    .control-select, .control-button, .date-input-wrapper {
+        width: 100%;
+    }
+    .pagination-footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

@@ -1,0 +1,161 @@
+/* ================================================= */
+/* 0. التنسيقات الأساسية (الجذرية والمشتركة) - بدون تغيير */
+/* ================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* تأكد أن هذا الجزء موجود في ملف CSS عام ومربوط بـ HTML */
+*, *::before, *::after {
+    box-sizing: border-box; 
+}
+body, html, #root { 
+    height: 100%;       
+    margin: 0;          
+    padding: 0;
+    width: 100%;        
+    overflow-x: hidden !important; 
+    overflow-y: auto; 
+    font-family: 'Inter', sans-serif;
+    background-color: #f4f6f9; 
+}
+
+/* التخطيط العام */
+.app-layout {
+    display: flex;
+    width: 100%;  
+    min-height: 100vh;
+}
+
+/* الشريط الجانبي (Sidebar) */
+/* (تنسيقات الشريط الجانبي هنا، لم يتم تغييرها) */
+.sidebar {
+    width: 250px; 
+    min-width: 250px; 
+    background-color: #fff;
+    padding: 30px 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+    flex-shrink: 0; 
+    min-height: 100vh;
+    overflow-y: auto; 
+}
+/* ... باقي تنسيقات الشريط الجانبي ... */
+.nav-item.active {
+    background-color: #e0f2fe; 
+    color: #4a90e2; 
+    font-weight: 600;
+}
+.nav-item.active svg {
+    color: #4a90e2; 
+}
+
+/* المحتوى الرئيسي */
+.main-content {
+    flex-grow: 1; 
+    padding: 30px 40px; 
+    overflow-y: auto; 
+    min-width: 0; 
+}
+
+/* ================================================= */
+/* 3. تنسيقات صفحة Add New Expense (الخاصة) */
+/* ================================================= */
+
+/* 3.1. العنوان والزر العودة */
+.add-expense-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+/* ... باقي تنسيقات العنوان والزر ... */
+.back-to-expenses-btn {
+    color: #4a90e2;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+.back-to-expenses-btn:hover {
+    background-color: #e0f2fe; 
+}
+
+
+/* 3.2. حاوية النموذج المركزية */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.expense-form {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    max-width: 600px; 
+    width: 100%;
+}
+/* ... باقي تنسيقات حقول النموذج ... */
+.date-input-wrapper {
+    position: relative;
+}
+.calendar-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    pointer-events: none;
+}
+/* ... باقي تنسيقات الأزرار ... */
+
+
+/* 3.4. التصنيفات الأخيرة (Recent Categories) */
+.recent-categories {
+    margin-top: 20px;
+    padding: 25px 0;
+}
+.recent-categories h3 {
+    font-size: 18px;
+    color: #1f2937;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+.category-tags-list {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* تنسيقات جديدة لدمج الأيقونة */
+.category-tag-large.with-icon {
+    display: flex; /* تحويل العنصر إلى فليكس لتنظيم الأيقونة والنص */
+    align-items: center;
+    gap: 5px; /* مسافة بين الأيقونة والنص */
+    padding: 8px 15px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+.category-tag-large.with-icon:hover {
+    opacity: 0.8;
+}
+.category-tag-large .category-icon {
+    /* التأكد من أن حجم الأيقونة مناسب */
+    width: 14px;
+    height: 14px;
+}
+
+
+/* ================================================= */
+/* 4. استجابة الشاشات (Media Queries) */
+/* ================================================= */
+
+@media (max-width: 768px) {
+    .app-layout {
+        flex-direction: column; 
+    }
+    /* ... باقي تنسيقات الشاشات الصغيرة ... */
+}

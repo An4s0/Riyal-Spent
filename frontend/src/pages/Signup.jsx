@@ -1,97 +1,76 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import api from "../api/api";
-import "../styles/auth.css";
+import { User, Mail, Lock, EyeOff } from "lucide-react";
+import "./Login.css";
 
-export default function Signup() {
+const Signup = () => {
   const navigate = useNavigate();
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirm, setConfirm] = useState("");
-  const [error, setError] = useState("");
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirm: "",
+  });
 
-  const handleSignup = async (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((p) => ({ ...p, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setError("");
+    if (!form.email || !form.password) return;
 
-    if (password !== confirm) {
-      setError("Passwords do not match");
-      return;
-    }
-
-    try {
-      await api.post("/auth/signup", {
-        full_name: fullName,
-        email,
-        password,
-      });
-
-      navigate("/login");
-    } catch {
-      setError("Signup failed");
-    }
+    localStorage.setItem("auth", "true");
+    navigate("/dashboard");
   };
 
   return (
-    <div className="full-center">
-      <div className="auth-card large">
+    <div className="login-page-wrapper">
+      <div className="login-card">
+        <h1>Riyal Spent</h1>
+        <p className="subtitle">Create your account</p>
 
-        <div className="auth-logo">
-          <img src="/logo.svg" alt="logo" width="28" />
-        </div>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Full Name</label>
+            <div className="input-wrapper">
+              <User size={18} className="input-icon" />
+              <input name="name" onChange={handleChange} required />
+            </div>
+          </div>
 
-        <h1 className="auth-title">Riyal Spent</h1>
-        <p className="auth-subtitle">
-          Create your account to start tracking expenses
-        </p>
+          <div className="form-group">
+            <label>Email</label>
+            <div className="input-wrapper">
+              <Mail size={18} className="input-icon" />
+              <input name="email" onChange={handleChange} required />
+            </div>
+          </div>
 
-        {error && <p className="auth-error">{error}</p>}
+          <div className="form-group">
+            <label>Password</label>
+            <div className="input-wrapper">
+              <Lock size={18} className="input-icon" />
+              <input name="password" type="password" onChange={handleChange} required />
+              <EyeOff size={18} className="eye-icon" />
+            </div>
+          </div>
 
-        <form onSubmit={handleSignup}>
-          <label className="auth-label">Full Name</label>
-          <input
-            className="auth-input"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            placeholder="Enter your full name"
-          />
-
-          <label className="auth-label">Email Address</label>
-          <input
-            className="auth-input"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
-          />
-
-          <label className="auth-label">Password</label>
-          <input
-            className="auth-input"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Create a password"
-          />
-
-          <label className="auth-label">Confirm Password</label>
-          <input
-            className="auth-input"
-            type="password"
-            value={confirm}
-            onChange={(e) => setConfirm(e.target.value)}
-            placeholder="Confirm password"
-          />
-
-          <button className="auth-btn">Sign Up</button>
+          <button type="submit" className="login-btn">
+            Sign Up
+          </button>
         </form>
 
-        <p className="auth-bottom">
+        <p className="footer-text">
           Already have an account?
-          <Link to="/login" className="auth-link"> Login</Link>
+          <Link to="/login" className="signup-link">
+            Login
+          </Link>
         </p>
       </div>
     </div>
   );
-}
+};
+
+export default Signup;

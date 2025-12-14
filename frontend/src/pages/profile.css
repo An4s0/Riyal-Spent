@@ -1,0 +1,202 @@
+/* --- Profile.css --- */
+
+/* ---------------------------------------------------- */
+/* التنسيقات المشتركة (Panel Styling) */
+/* ---------------------------------------------------- */
+.profile-panel,
+.account-actions-panel {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px;
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #4b5563;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* ---------------------------------------------------- */
+/* 1. User Header Info */
+/* ---------------------------------------------------- */
+.user-header-info h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 5px;
+}
+.member-status {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 25px;
+}
+
+/* ---------------------------------------------------- */
+/* 2. Profile Information (الاسم والبريد) */
+/* ---------------------------------------------------- */
+.profile-info-grid {
+    display: grid;
+    /* عمودين متساويين */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px;
+}
+
+.info-item {
+    padding-bottom: 10px;
+}
+
+.info-item label {
+    display: block;
+    font-size: 14px;
+    color: #4b5563;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+.info-item .info-value {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #1f2937;
+    font-weight: 400;
+}
+
+/* ---------------------------------------------------- */
+/* 3. Account Statistics (الإحصائيات) */
+/* ---------------------------------------------------- */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.stat-item {
+    background-color: #f9fafb;
+    border-left: 3px solid #4a90e2; 
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.stat-item label {
+    display: block;
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 2px;
+}
+
+.stat-item .stat-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+/* تلوين أشرطة الإحصائيات الجانبية (للتجميل) */
+.stats-grid .stat-item:nth-child(2) { border-left-color: #ffc107; } 
+.stats-grid .stat-item:nth-child(3) { border-left-color: #28a745; } 
+.stats-grid .stat-item:nth-child(4) { border-left-color: #6f42c1; } 
+
+
+/* ---------------------------------------------------- */
+/* 4. Account Actions (الأزرار/الروابط) */
+/* ---------------------------------------------------- */
+.account-actions-panel .section-title {
+    margin-top: 0;
+}
+
+.action-item {
+    /* تطبيق التنسيقات على Link و button */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #e5e7eb;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    background: none; /* لإزالة خلفية الأزرار الافتراضية */
+    border: none;
+    width: 100%;
+    text-align: left;
+    text-decoration: none; /* للروابط */
+    color: inherit;
+}
+
+.action-item:last-child {
+    border-bottom: none;
+}
+
+.action-item:hover {
+    background-color: #f9fafb;
+}
+
+.action-details {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.action-icon {
+    padding: 8px;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.action-name {
+    font-size: 16px;
+    font-weight: 500;
+    color: #1f2937;
+}
+
+.action-description {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.arrow-icon {
+    font-size: 18px;
+    color: #9ca3af;
+}
+
+/* تنسيقات الألوان الخاصة للإجراءات */
+.edit-action .action-icon, .blue-icon { background-color: #e0f2fe; color: #4a90e2; } /* أزرق */
+.password-action .action-icon, .orange-icon { background-color: #fef3c7; color: #f59e0b; } /* برتقالي */
+
+/* تنسيق زر تسجيل الخروج الأحمر */
+.logout-action { 
+    background-color: #fef2f2; /* خلفية حمراء فاتحة للزر نفسه */
+    border-radius: 8px;
+    padding: 15px;
+    border-bottom: none;
+}
+.logout-action .action-icon, .red-icon { background-color: #fee2e2; color: #dc2626; } /* أحمر غامق للأيقونة */
+.logout-action .action-name, .logout-action .action-description {
+    color: #dc2626; /* جعل النص أحمر */
+}
+.logout-action .arrow-icon {
+    color: #dc2626;
+}
+
+/* ---------------------------------------------------- */
+/* استجابة الشاشات (Media Queries) */
+/* ---------------------------------------------------- */
+@media (max-width: 992px) {
+    .profile-info-grid,
+    .stats-grid {
+        /* تحويل الشبكة إلى عمودين على الشاشات الأصغر */
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 600px) {
+    .profile-info-grid,
+    .stats-grid {
+        /* عمود واحد على الشاشات الصغيرة جداً */
+        grid-template-columns: 1fr;
+    }
+}

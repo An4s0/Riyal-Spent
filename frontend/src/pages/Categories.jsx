@@ -1,87 +1,135 @@
-import { Link } from "react-router-dom";
-import "../styles/expenses.css";
+import React, { useState } from "react";
+import { NavLink, Link } from "react-router-dom";
+import {
+  LayoutDashboard,
+  Wallet,
+  Boxes,
+  User,
+  Plus,
+  Pencil,
+  Trash2,
+} from "lucide-react";
+import "./Catgories.css";
 
-export default function Categories() {
-  const categories = [
-    { id: 1, name: "Food", color: "food", count: 18 },
-    { id: 2, name: "Transport", color: "transport", count: 9 },
-    { id: 3, name: "Entertainment", color: "entertainment", count: 6 },
-    { id: 4, name: "Shopping", color: "shopping", count: 11 },
-    { id: 5, name: "Others", color: "others", count: 3 },
-  ];
+/* ---------------- Sidebar ---------------- */
 
-  const handleDelete = (id) => {
-    if (confirm("Delete this category?")) {
-      alert(`Category ${id} deleted`);
-    }
-  };
+const sidebarItems = [
+  { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
+  { name: "Expenses", path: "/expenses", icon: Wallet },
+  { name: "Categories", path: "/categories", icon: Boxes },
+  { name: "Profile", path: "/profile", icon: User },
+];
+
+const Sidebar = () => (
+  <div className="sidebar">
+    <h2 className="sidebar-logo">Riyal Spent</h2>
+    <nav className="sidebar-nav">
+      {sidebarItems.map((item) => (
+        <NavLink
+          key={item.name}
+          to={item.path}
+          className={({ isActive }) =>
+            item.name === "Categories" ? "nav-item active" : "nav-item"
+          }
+        >
+          <item.icon size={18} />
+          <span>{item.name}</span>
+        </NavLink>
+      ))}
+    </nav>
+  </div>
+);
+
+/* ---------------- Card ---------------- */
+
+const CategoryCard = ({ category }) => {
+  const Icon = category.icon || Boxes;
 
   return (
-    <div className="expenses-page">
-      {/* Header */}
-      <div className="expenses-header">
-        <div>
-          <h1>Categories</h1>
-          <p>Manage your expense categories</p>
-        </div>
-
-        <Link to="/categories/add" className="add-expense-btn">
-          + Add Category
+    <div className="category-card">
+      <div className="card-actions">
+        <Link
+          to={`/categories/edit/${category.id}`}
+          className="action-btn edit-btn"
+        >
+          <Pencil size={16} />
+        </Link>
+        <Link
+          to={`/categories/edit/${category.id}`}
+          className="action-btn delete-btn"
+        >
+          <Trash2 size={16} />
         </Link>
       </div>
 
-      {/* Categories Grid */}
       <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: "16px",
-        }}
+        className="card-icon-wrapper"
+        style={{ backgroundColor: category.iconBg }}
       >
-        {categories.map((cat) => (
-          <div key={cat.id} className="summary-card">
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: "12px",
-              }}
-            >
-              <span
-                className={`category-badge ${cat.color}`}
-                style={{ fontSize: "13px" }}
-              >
-                {cat.name}
-              </span>
-
-              <div>
-                <Link
-                  to={`/categories/edit/${cat.id}`}
-                  className="action-btn"
-                  title="Edit"
-                  style={{ marginRight: "8px" }}
-                >
-                  ✏️
-                </Link>
-
-                <button
-                  type="button"
-                  className="action-btn"
-                  title="Delete"
-                  onClick={() => handleDelete(cat.id)}
-                >
-                  🗑️
-                </button>
-              </div>
-            </div>
-
-            <p style={{ fontSize: "14px", color: "#6b7280" }}>
-              {cat.count} expenses
-            </p>
-          </div>
-        ))}
+        <Icon size={24} color={category.color} />
       </div>
+
+      <h3 className="card-title" style={{ color: category.color }}>
+        {category.name}
+      </h3>
+      <p className="card-description">{category.description}</p>
+      <p className="card-transactions">
+        {category.transactions || 0} transactions
+      </p>
     </div>
   );
-}
+};
+
+/* ---------------- Page ---------------- */
+
+const Categories = ({ categories = [] }) => {
+  const [search, setSearch] = useState("");
+
+  const filtered = categories.filter((c) =>
+    c.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  return (
+    <div className="app-layout">
+      <Sidebar />
+
+      <main className="main-content">
+        <header className="page-header">
+          <div>
+            <h1>Categories</h1>
+            <p className="header-subtitle">
+              Manage your expense categories
+            </p>
+          </div>
+
+          <Link to="/categories/add" className="btn-add-category">
+            <Plus size={18} /> Add Category
+          </Link>
+        </header>
+
+        <div className="search-controls">
+          <input
+            type="text"
+            placeholder="Search categories..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+
+        <div className="categories-grid">
+          {filtered.length === 0 && (
+            <p style={{ gridColumn: "1 / -1", textAlign: "center" }}>
+              No categories found
+            </p>
+          )}
+
+          {filtered.map((cat) => (
+            <CategoryCard key={cat.id} category={cat} />
+          ))}
+        </div>
+      </main>
+    </div>
+  );
+};
+
+export default Categories;

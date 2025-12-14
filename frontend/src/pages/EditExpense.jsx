@@ -1,120 +1,199 @@
-import { useParams, useNavigate } from "react-router-dom";
-import "../styles/expenses.css";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate, NavLink, Link } from "react-router-dom";
+import {
+  LayoutDashboard,
+  Wallet,
+  Boxes,
+  User,
+  Save,
+  Trash2,
+  X,
+} from "lucide-react";
 
-export default function EditExpense() {
+/* ---------------- Sidebar ---------------- */
+
+const navItems = [
+  { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
+  { name: "Expenses", path: "/expenses", icon: Wallet },
+  { name: "Categories", path: "/categories", icon: Boxes },
+  { name: "Profile", path: "/profile", icon: User },
+];
+
+const Sidebar = () => (
+  <div className="sidebar">
+    <h2 className="sidebar-logo">Riyal Spent</h2>
+    <nav className="sidebar-nav">
+      {navItems.map((item) => (
+        <NavLink
+          key={item.name}
+          to={item.path}
+          className={({ isActive }) =>
+            item.name === "Expenses" ? "nav-item active" : "nav-item"
+          }
+        >
+          <item.icon size={18} />
+          <span>{item.name}</span>
+        </NavLink>
+      ))}
+    </nav>
+  </div>
+);
+
+/* ---------------- Page ---------------- */
+
+const EditExpense = ({
+  expenses = [],
+  categories = [],
+  updateExpense,
+  deleteExpense,
+}) => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const expenseId = Number(id);
 
-  // بيانات وهمية (لاحقاً تجي من API)
-  const expense = {
-    amount: "45",
-    category: "Food",
-    date: "2024-11-24",
-    description: "Lunch at restaurant",
+  const existing = expenses.find((e) => e.id === expenseId);
+
+  const [form, setForm] = useState({
+    amount: "",
+    categoryId: "",
+    date: "",
+    description: "",
+  });
+
+  useEffect(() => {
+    if (!existing) return;
+    setForm({
+      amount: existing.amount,
+      categoryId: existing.categoryId,
+      date: existing.date,
+      description: existing.description || "",
+    });
+  }, [existing]);
+
+  if (!existing) {
+    return (
+      <div style={{ padding: 40, textAlign: "center" }}>
+        <h2>Expense not found</h2>
+        <Link to="/expenses">Back to Expenses</Link>
+      </div>
+    );
+  }
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((p) => ({ ...p, [name]: value }));
   };
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    alert(`Expense ${id} updated`);
+
+    updateExpense({
+      id: expenseId,
+      amount: Number(form.amount),
+      categoryId: Number(form.categoryId),
+      date: form.date,
+      description: form.description,
+    });
+
     navigate("/expenses");
   };
 
   const handleDelete = () => {
-    if (confirm("Are you sure you want to delete this expense?")) {
-      alert(`Expense ${id} deleted`);
-      navigate("/expenses");
-    }
+    if (!window.confirm("Delete this expense?")) return;
+    deleteExpense(expenseId);
+    navigate("/expenses");
   };
 
   return (
-    <div className="expenses-page">
-      {/* Header */}
-      <div className="expenses-header">
-        <div>
-          <h1>Edit Expense</h1>
-          <p>Update your expense details</p>
-        </div>
+    <div className="app-layout">
+      <Sidebar />
 
-        <button
-          type="button"
-          className="add-expense-btn"
-          onClick={() => navigate("/expenses")}
-        >
-          ← Back
-        </button>
-      </div>
-
-      {/* Form */}
-      <form className="summary-card" onSubmit={handleUpdate}>
-        <div style={{ marginBottom: "16px" }}>
-          <label>Amount *</label>
-          <input
-            type="number"
-            defaultValue={expense.amount}
-            required
-          />
-        </div>
-
-        <div style={{ marginBottom: "16px" }}>
-          <label>Category *</label>
-          <select defaultValue={expense.category} required>
-            <option>Food</option>
-            <option>Transport</option>
-            <option>Entertainment</option>
-            <option>Shopping</option>
-            <option>Others</option>
-          </select>
-        </div>
-
-        <div style={{ marginBottom: "16px" }}>
-          <label>Date *</label>
-          <input
-            type="date"
-            defaultValue={expense.date}
-            required
-          />
-        </div>
-
-        <div style={{ marginBottom: "24px" }}>
-          <label>Description</label>
-          <textarea
-            rows="3"
-            defaultValue={expense.description}
-          />
-        </div>
-
-        {/* Actions */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <button
-            type="button"
-            className="action-btn"
-            onClick={handleDelete}
-            style={{ color: "#ef4444" }}
-          >
-            🗑️ Delete Expense
-          </button>
-
+      <main className="main-content">
+        <header className="add-expense-header">
           <div>
-            <button
-              type="button"
-              onClick={() => navigate("/expenses")}
-              style={{ marginRight: "12px" }}
-            >
-              Cancel
-            </button>
-
-            <button type="submit" className="add-expense-btn">
-              💾 Update Expense
-            </button>
+            <h2>Edit Expense</h2>
+            <p className="header-subtitle">Update expense details</p>
           </div>
+          <Link to="/expenses" className="back-to-expenses-btn">
+            ← Back
+          </Link>
+        </header>
+
+        <div className="form-container">
+          <form className="expense-form" onSubmit={handleUpdate}>
+            <div className="form-group">
+              <label>Amount*</label>
+              <input
+                type="number"
+                name="amount"
+                value={form.amount}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Category*</label>
+              <select
+                name="categoryId"
+                value={form.categoryId}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select category</option>
+                {categories.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label>Date*</label>
+              <input
+                type="date"
+                name="date"
+                value={form.date}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Description</label>
+              <textarea
+                name="description"
+                rows="3"
+                value={form.description}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-actions">
+              <button
+                type="button"
+                className="cancel-btn"
+                onClick={handleDelete}
+                style={{ color: "#ef4444" }}
+              >
+                <Trash2 size={18} /> Delete
+              </button>
+
+              <div>
+                <Link to="/expenses" className="cancel-btn">
+                  <X size={18} /> Cancel
+                </Link>
+                <button type="submit" className="save-btn">
+                  <Save size={18} /> Update
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
-      </form>
+      </main>
     </div>
   );
-}
+};
+
+export default EditExpense;

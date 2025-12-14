@@ -1,73 +1,97 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import api from "../api/api";
-import "../styles/auth.css";
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { User, Lock, Eye, EyeOff } from "lucide-react";
+import "./Login.css";
 
-export default function Login() {
+const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [show, setShow] = useState(false);
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
 
-  const handleLogin = async (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((p) => ({ ...p, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setError("");
 
-    try {
-      const res = await api.post("/auth/login", {
-        email,
-        password,
-      });
+    if (!form.email || !form.password) return;
 
-      localStorage.setItem("token", res.data.token);
-      navigate("/dashboard");
-    } catch {
-      setError("Invalid email or password");
-    }
+    localStorage.setItem("auth", "true");
+    navigate("/dashboard");
   };
 
   return (
-    <div className="full-center">
-      <div className="auth-card">
-
-        <div className="auth-logo">
-          <img src="/logo.svg" alt="logo" width="28" />
+    <div className="login-page-wrapper">
+      <div className="login-card">
+        <div className="logo-container">
+          <div className="logo" />
         </div>
 
-        <h1 className="auth-title">Riyal Spent</h1>
-        <p className="auth-subtitle">
-          Welcome back! Please login to your account
-        </p>
+        <h1>Riyal Spent</h1>
+        <p className="subtitle">Login to your account</p>
 
-        {error && <p className="auth-error">{error}</p>}
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Email</label>
+            <div className="input-wrapper">
+              <User size={18} className="input-icon" />
+              <input
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                placeholder="Enter email"
+                required
+              />
+            </div>
+          </div>
 
-        <form onSubmit={handleLogin}>
-          <label className="auth-label">Email Address</label>
-          <input
-            className="auth-input"
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <div className="form-group">
+            <label>Password</label>
+            <div className="input-wrapper">
+              <Lock size={18} className="input-icon" />
+              <input
+                name="password"
+                type={show ? "text" : "password"}
+                value={form.password}
+                onChange={handleChange}
+                placeholder="Enter password"
+                required
+              />
+              {show ? (
+                <EyeOff
+                  size={18}
+                  className="eye-icon"
+                  onClick={() => setShow(false)}
+                />
+              ) : (
+                <Eye
+                  size={18}
+                  className="eye-icon"
+                  onClick={() => setShow(true)}
+                />
+              )}
+            </div>
+          </div>
 
-          <label className="auth-label">Password</label>
-          <input
-            className="auth-input"
-            type="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <button type="submit" className="login-btn">
+            Login
+          </button>
 
-          <button className="auth-btn">Login</button>
+          <p className="footer-text">
+            Don’t have an account?
+            <Link to="/signup" className="signup-link">
+              Sign up
+            </Link>
+          </p>
         </form>
-
-        <p className="auth-bottom">
-          Don’t have an account?
-          <Link to="/signup" className="auth-link"> Sign up</Link>
-        </p>
       </div>
     </div>
   );
-}
+};
+
+export default Login;
